@@ -10,6 +10,13 @@ struct Purchase {
 struct Purchases {
     inner: HashMap<i64, Purchase>,
 }
+impl Purchases {
+    fn new() -> Self {
+        Self {
+            inner: HashMap::new(),
+        }
+    }
+}
 
 struct History {
     id: i64,
@@ -22,6 +29,13 @@ struct History {
 
 struct Histories {
     inner: HashMap<i64,History>,
+}
+impl Histories {
+    fn new() -> Self {
+        Self {
+            inner: HashMap::new(),
+        }
+    }
 }
 
 fn main() {
