@@ -8,13 +8,17 @@ struct Purchase {
 }
 
 struct Purchases {
-    inner: HashMap<i64, Purchase>,
+    inner: HashMap<String, Purchase>,
 }
 impl Purchases {
     fn new() -> Self {
         Self {
             inner: HashMap::new(),
         }
+    }
+
+    fn add(&mut self, purchase: Purchase) {
+        self.inner.insert(purchase.name.clone(), purchase);
     }
 }
 
