@@ -7,4 +7,5 @@ edition = "2021"
 
 [dependencies]
 thiserror = "1.0.37"
-structopt = "0.3.26"
+serde = { version = "1", features = ["derive"] }
+csv = "1.1"
