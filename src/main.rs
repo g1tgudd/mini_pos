@@ -104,6 +104,36 @@ impl Histories {
     }
 }
 
+fn main_menu() {
+    fn show() {
+        println!("");
+        println!("=== Manage Bills ===");
+        println!("1. Add Bills");
+        println!("2. View Bills");
+        println!("3. Remove Bills");
+        println!("4. Update Bills");
+        println!("");
+        println!("Enter Selection");
+    }
+
+    let mut bills = Bills::new();
+
+    loop {
+        show();
+        let input = match get_input() {
+            Some(input) => input,
+            None => return
+        };
+        match input.as_str() {
+            "1" => add_bill_menu(&mut bills),
+            "2" => view_bills_menu(&bills),
+            "3" => remove_bill_menu(&mut bills),
+            "4" => update_bill_menu(&mut bills),
+            _ => break
+        }
+    }
+}
+
 fn main() {
     println!("Hello, world!");
 }
