@@ -106,6 +106,7 @@ impl Purchases {
     }
 }
 
+//Sub Menu
 fn add_order_menu(purchases: &mut Purchases) {
     // let id: i64 = match get_price(){
     //     Some(id) => id + 1,
