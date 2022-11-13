@@ -66,11 +66,7 @@ fn get_price() -> Option<i32> {
 }
 
 fn get_order (purchases: &mut Purchases) {
-    println!("Bill name: ");
-    let id = match fields.get(0) {
-        Some(id) => i64::from_str_radix(id, 10)?,
-        None => return Err(ParseError::EmptyRecord)
-    };
+    println!("Customer Name: ");
     let name = match get_input() {
         Some(input) => input,
         None => return
@@ -107,16 +103,14 @@ impl Histories {
 fn main_menu() {
     fn show() {
         println!("");
-        println!("=== Manage Bills ===");
-        println!("1. Add Bills");
-        println!("2. View Bills");
-        println!("3. Remove Bills");
-        println!("4. Update Bills");
+        println!("=== Mini Pos ===");
+        println!("1. Input Order");
+        println!("2. Process Order");
+        println!("3. Remove Order");
+        println!("4. View Orders History");
         println!("");
         println!("Enter Selection");
     }
-
-    let mut bills = Bills::new();
 }
 
 fn main() {
