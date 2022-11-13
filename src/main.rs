@@ -48,8 +48,8 @@ enum ParseError {
     MissingField(String),
 }
 
-fn parse_history(report: &str) -> Result<History, ParseError> {
-    let strings: Vec<&str> = report.split(',').collect();
+fn parse_history(history: &str) -> Result<History, ParseError> {
+    let strings: Vec<&str> = history.split(',').collect();
 
     let id = match strings.first() {
         Some(id) => id.parse::<i64>()?,
