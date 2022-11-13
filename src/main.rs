@@ -58,27 +58,27 @@ fn parse_history(report: &str) -> Result<History, ParseError> {
 
     let name = match strings.get(1) {
         Some(name) => name.to_string(),
-        None => return Err(ParseError::EmptyRecord),
+        None => return Err(ParseError::MissingField("name".to_owned())),
     };
 
     let price = match strings.get(2) {
         Some(price) => price.parse::<i32>()?,
-        None => return Err(ParseError::EmptyRecord),
+        None => return Err(ParseError::MissingField("price".to_owned())),
     };
 
     let discount = match strings.get(3) {
         Some(discount) => discount.trim().parse::<i32>()?,
-        None => return Err(ParseError::EmptyRecord),
+        None => return Err(ParseError::MissingField("discount".to_owned())),
     };
 
     let payment = match strings.get(4) {
         Some(payment) => payment.parse::<i32>()?,
-        None => return Err(ParseError::EmptyRecord),
+        None => return Err(ParseError::MissingField("payment".to_owned())),
     };
 
     let change = match strings.get(5) {
         Some(change) => change.parse::<i32>()?,
-        None => return Err(ParseError::EmptyRecord),
+        None => return Err(ParseError::MissingField("change".to_owned())),
     };
 
     Ok(History { id, name, price, discount, payment, change })
