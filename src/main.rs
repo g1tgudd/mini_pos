@@ -300,7 +300,7 @@ fn main_menu() {
                 eprintln!("{}",e);
             },
             _ => break,
-        };
+        };s
     }
 
 }
