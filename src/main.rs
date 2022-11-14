@@ -107,47 +107,71 @@ impl Purchases {
 }
 
 //Sub Menu
-fn add_order_menu(purchases: &mut Purchases) {
+fn add_purchase(purchases: &mut Purchases) {
     // let id: i64 = match get_price(){
     //     Some(id) => id + 1,
     //     None => return
     // };
+    
+    let id:i64 = purchases.next_id();
 
-    println!("Input Name: ");
+    println!("===== Input Name: ");
     let name: String = match get_input(){
         Some(name) => name,
         None => return
     };
 
-    println!("Input Item: ");
+    println!("===== Input Item: ");
     let item: String = match get_input(){
         Some(item) => item,
         None => return
     };
 
-    println!("Input Quantity: ");
+    println!("===== Input Quantity: ");
     let quantity: i32 = match get_price(){
         Some(quantity) => quantity,
         None => return
     };
 
-    println!("Input Price: ");
+    println!("===== Input Price: ");
     let price: i32 = match get_price(){
         Some(price) => price,
         None => return
     };
 
+    //function untuk write ke Purchase.csv
+    fn write_purchase(id_input:i64, name_input:&str, item_input:&str, quantity_input: i32, price_input: i32)-> Result<(), Box<dyn Error>>{
+        let mut file = OpenOptions::new()
+            .write(true)
+            .append(true)
+            .open("src/bin/Purchase.csv")
+            .unwrap();
+
+        let mut writer = WriterBuilder::new()
+            .has_headers(false)
+            .from_writer(file);
+        
+        writer.serialize(Purchase {
+            id: id_input, //error not in scope next_id, make temp value.
+            name: name_input.to_owned(),
+            item: item_input.to_owned(),
+            quantity: quantity_input,
+            price: price_input,
+        })?;
+
+        writer.flush()?;
+        Ok(())
+    }
+    if let Err(e) = write_purchase(id,name.trim(),item.trim(),quantity,price){
+        eprintln!("{}",e);
+    }
+
     let purchase: Purchase = Purchase { id, name, item, quantity, price };
-    purchases.add(purchase);
-    println!("Input Order Added.");
+    purchases.add(purchase); //add ke struct purchases. belum ke add ke csv.
+    println!("Purchase Added.");
+    
 }
 
-//NGK DIPAKE!!
-fn view_purchases(purchases: &Purchases) {
-    for purchase in purchases.get_all() {
-        println!("{:?}", purchase);
-    }
-}
 
 //function buat Parse Purchase.csv PARAM : .... 
 fn read_purchase(purchases: &mut Purchases) -> Result<(&mut Purchases), Box<dyn Error>> {
@@ -156,7 +180,7 @@ fn read_purchase(purchases: &mut Purchases) -> Result<(&mut Purchases), Box<dyn 
 
     for result in reader.deserialize() {
         let record: Purchase = result?;
-        println!("DEBUG {:?}", &record);
+        // println!("DEBUG {:?}", &record);
         purchases.add(record);
     }
     for purchase in purchases.get_all() {
@@ -165,29 +189,6 @@ fn read_purchase(purchases: &mut Purchases) -> Result<(&mut Purchases), Box<dyn 
     return Ok(purchases)
 }
 
-//function untuk write ke Purchase.csv
-fn write_purchase(name_input:&str, item_input:&str, quantity_input: i32, price_input: i32)-> Result<(), Box<dyn Error>>{
-    let mut file = OpenOptions::new()
-        .write(true)
-        .append(true)
-        .open("src/bin/Purchase.csv")
-        .unwrap();
-
-    let mut writer = WriterBuilder::new()
-        .has_headers(false)
-        .from_writer(file);
-    
-    writer.serialize(Purchase {
-        id: 47, //error not in scope next_id
-        name: name_input.to_owned(),
-        item: item_input.to_owned(),
-        quantity: quantity_input,
-        price: price_input,
-    })?;
-
-    writer.flush()?;
-    Ok(())
-}
 
 #[derive(Debug, Deserialize, Serialize)]
 struct History {
@@ -231,6 +232,7 @@ impl Histories {
     }
 }
 
+//NGK DIPAKE
 fn view_histories(histories: &Histories) {
     for history in histories.get_all() {
         println!("{:?}", history);
@@ -238,23 +240,26 @@ fn view_histories(histories: &Histories) {
 }
 
 //histories: &mut Histories (param read_history)
-fn read_history() -> Result<(), Box<dyn Error>> {
-    let mut histories = Histories::new(); //init histories struct baru
-    //read dari history.csv
+fn read_history(histories: &mut Histories) -> Result<(&mut Histories), Box<dyn Error>> {
+    
     let mut reader = csv::Reader::from_path("src/bin/History.csv")?;
 
-    //baca per line
     for result in reader.deserialize() {
-        let record: History = result?; //record --> per line nya
-        histories.add(record); //add ke struct histories
+        let record: History = result?;
+        // println!("DEBUG {:?}", &record);
+        histories.add(record);
     }
-    Ok(())
+    for history in histories.get_all() {
+        println!("{:?}", history);
+    }
+    return Ok(histories)
 }
 
 fn main_menu() {
     fn show() {
         println!("");
         println!("=== Mini Pos ===");
+        println!("By Henry Hamilton Prasetya & Richie Junior Soewito");
         println!("1. Input Purchase");
         println!("2. Process Order");
         println!("3. View History");
@@ -263,9 +268,20 @@ fn main_menu() {
         println!("Enter Selection");
     }
     
+    
+
     let mut purchases = Purchases::new();//scan purchase .csv
     let mut histories = Histories::new();//scan history.csv
-    
+
+    println!("Parsing Purchases...");
+    if let Err(e) = read_purchase(&mut purchases){
+        eprintln!("{}",e);
+        }
+    println!("Parsing Histories...");
+    if let Err(e) = read_history(&mut histories){
+        eprintln!("{}",e);
+        }
+    println!("Parsing Complete!");
 
     loop{
         show();
@@ -275,9 +291,11 @@ fn main_menu() {
         };
 
         match input.as_str() {
-            // "1" => ,
-            // "2" => ,
-            // "3" => view_histories(&histories),
+            "1" => add_purchase(&mut purchases),
+            //"2" => 
+            "3" => if let Err(e) = read_history(&mut histories){
+                eprintln!("{}",e);
+            },
             "4" => if let Err(e) = read_purchase(&mut purchases){
                 eprintln!("{}",e);
             },

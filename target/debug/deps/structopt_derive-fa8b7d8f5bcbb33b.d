@@ -1,0 +1,10 @@
+d:\Windows Folder\Documents\Rust Programming Language\GitHub\mini_pos\target\debug\deps\structopt_derive-fa8b7d8f5bcbb33b.dll: C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\lib.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\attrs.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\doc_comments.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\parse.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\spanned.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\ty.rs
+
+d:\Windows Folder\Documents\Rust Programming Language\GitHub\mini_pos\target\debug\deps\structopt_derive-fa8b7d8f5bcbb33b.d: C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\lib.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\attrs.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\doc_comments.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\parse.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\spanned.rs C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\ty.rs
+
+C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\lib.rs:
+C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\attrs.rs:
+C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\doc_comments.rs:
+C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\parse.rs:
+C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\spanned.rs:
+C:\Users\richi\.cargo\registry\src\github.com-1ecc6299db9ec823\structopt-derive-0.4.18\src\ty.rs:
